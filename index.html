@@ -1081,36 +1081,13 @@
       <p>Sign our petition to the City of Rockingham and WA Government to invest in a dedicated youth bike and skate park — and more free activities for young people across the region. Every signature counts.</p>
 
       <div class="action-btns">
-        <a href="#" class="btn-primary" onclick="showSuccess(event)">Sign the Petition</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScgvjsEXRjFWp_86UUjvDvNGAMkSNj4Y62LGxLuYZQNm1-hfg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-primary">Sign the Petition</a>
         <a href="#" class="btn-secondary" onclick="alert('Share link copied!');return false;">Share This Page</a>
       </div>
 
-      <div class="petition-form">
-        <input type="text" placeholder="Your name" id="petitionName" aria-label="Your name" />
-        <input type="email" placeholder="Your email" id="petitionEmail" aria-label="Your email" />
-        <button onclick="handlePetition()" aria-label="Sign petition">Sign Now</button>
-      </div>
-      <p id="successMsg" style="color:var(--green);margin-top:16px;font-weight:600;display:none">
-        Thanks for signing! Together we'll make Rockingham better for every young person.
-      </p>
-
       <p style="font-size:0.8rem;color:var(--muted);margin-top:24px">
-        Your information is only used for this community petition and will not be shared with third parties.
+        You'll be taken to a secure Google Form to add your signature.
       </p>
-    </div>
-
-    <!-- Petition counter -->
-    <div style="text-align:center;margin-top:56px" class="reveal">
-      <div style="background:var(--card);border:1px solid var(--card-border);border-radius:20px;padding:32px 24px;max-width:460px;margin:0 auto">
-        <div style="font-family:'Outfit',sans-serif;font-size:3rem;font-weight:900;color:var(--sky)" id="sigCount">847</div>
-        <div style="color:var(--muted);font-size:0.9rem;margin-bottom:16px">Rockingham residents have signed</div>
-        <div style="background:rgba(14,165,233,0.1);border-radius:100px;height:10px;overflow:hidden">
-          <div id="progressBar" style="height:100%;background:linear-gradient(90deg,var(--sky),var(--sky-light));border-radius:100px;width:0%;transition:width 1.4s cubic-bezier(0.22,1,0.36,1)"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.78rem;color:var(--muted)">
-          <span>847 signatures</span><span>Goal: 1,000</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1173,7 +1150,6 @@
   /* === INTERSECTION OBSERVER === */
   const countersDone = new Set();
   const barsDone = { done: false };
-  const progressDone = { done: false };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1192,32 +1168,14 @@
           animateBars();
         }
 
-        // progress bar
-        if (entry.target.id === 'sigCount' && !progressDone.done) {
-          progressDone.done = true;
-          animateProgress();
-        }
+
       }
     });
   }, { threshold: 0.15 });
 
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .counter, #barChart, #sigCount').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .counter, #barChart').forEach(el => observer.observe(el));
 
-  /* === PETITION === */
-  function handlePetition() {
-    const name = document.getElementById('petitionName').value.trim();
-    const email = document.getElementById('petitionEmail').value.trim();
-    if (!name || !email) { alert('Please fill in your name and email.'); return; }
-    const c = document.getElementById('sigCount');
-    c.textContent = (parseInt(c.textContent.replace(/,/g,'')) + 1).toLocaleString();
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('petitionName').value = '';
-    document.getElementById('petitionEmail').value = '';
-  }
-  function showSuccess(e) {
-    e.preventDefault();
-    document.getElementById('action').scrollIntoView({behavior:'smooth'});
-  }
+
 
   /* === SMOOTH SCROLL NAV === */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
